@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+chmod 0777 /workspace
+exec /key-inject-sshd

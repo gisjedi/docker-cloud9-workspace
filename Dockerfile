@@ -5,6 +5,14 @@ ENV USERNAME cloud9
 ENV SUDO true
 ENV NOPASSWD true
 
-RUN apt-get install -y curl git && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs build-essential && mkdir -p /workspace && chmod 777 /workspace
+COPY fix-perms.sh /fix-perms
+
+RUN apt-get install -y curl git \
+    && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs build-essential \
+    && mkdir -p /workspace \
+    && chmod +x /fix-perms
 
 VOLUME ["/workspace"]
+
+CMD ["/fix-perms"]
